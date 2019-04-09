@@ -42,12 +42,12 @@ $form['moduleSettings']['extrabodyclass'] = [
 $form['moduleSettings']['tocTitle'] = [
   '#type' => 'textfield',
   '#title' => t('tocTitle'),
-  '#description' => t('An optional title for the TOC, leave blank for none. Will be an storng with class <code>toc-title</code> so you can theme it'),
+  '#description' => t('An optional title for the TOC, leave blank for none. Will be an strong tag with class <code>toc-title</code> so you can theme it'),
   '#default_value' => variable_get('tocTitle', 'Page Outline:'),
 ];
 $form['moduleSettings']['minActivate'] = [
   '#type' => 'textfield',
-  '#title' => t('minActivate'),
+  '#title' => t('minActivate (number)'),
   '#description' => t('Only activate if greater than or equal to this many headings'),
   '#default_value' => variable_get('minActivate', '3'),
 ];
@@ -137,7 +137,7 @@ $form['tocbotjsSettings']['listItemClass'] = [
 ];
 $form['tocbotjsSettings']['collapseDepth'] = [
   '#type' => 'textfield',
-  '#title' => t('collapseDepth'),
+  '#title' => t('collapseDepth (number)'),
   '#description' => t('Class to add to list items.'),
   '#default_value' => variable_get('collapseDepth', '0'),
 ];
@@ -155,13 +155,13 @@ $form['tocbotjsSettings']['scrollSmooth'] = [
 ];
 $form['tocbotjsSettings']['scrollSmoothDuration'] = [
   '#type' => 'textfield',
-  '#title' => t('scrollSmoothDuration'),
+  '#title' => t('scrollSmoothDuration (number)'),
   '#description' => t('Smooth scroll duration.'),
   '#default_value' => variable_get('scrollSmoothDuration', '420'),
 ];
 $form['tocbotjsSettings']['throttleTimeout'] = [
   '#type' => 'textfield',
-  '#title' => t('throttleTimeout'),
+  '#title' => t('throttleTimeout (number)'),
   '#description' => t('Timeout between events firing to make sure its not too rapid (for performance reasons)'),
   '#default_value' => variable_get('throttleTimeout', '50'),
 ];
@@ -285,7 +285,7 @@ function tocbot_block_view($delta='') {
 // Gather settings to send to tocbot-init
 $settings['extrabodyclass'] = variable_get('extrabodyclass', 'toc-is-active');
 $settings['tocTitle'] = variable_get('tocTitle', 'Page Outline:');
-$settings['minActivate'] = variable_get('minActivate', '3');
+$settings['minActivate'] = intval(variable_get('minActivate', '3'));
 $settings['options']['tocSelector'] = variable_get('tocSelector', '.js-toc-block');
 $settings['options']['contentSelector'] = variable_get('contentSelector', '#main-content');
 $settings['options']['headingSelector'] = variable_get('headingSelector', 'h2, h3, h4, h5, h6');
@@ -298,11 +298,11 @@ $settings['options']['extraListClasses'] = variable_get('extraListClasses', '');
 $settings['options']['isCollapsedClass'] = variable_get('isCollapsedClass', 'is-collapsed');
 $settings['options']['collapsibleClass'] = variable_get('collapsibleClass', 'is-collapsible');
 $settings['options']['listItemClass'] = variable_get('listItemClass', 'toc-list-item');
-$settings['options']['collapseDepth'] = variable_get('collapseDepth', '0');
+$settings['options']['collapseDepth'] = intval(variable_get('collapseDepth', '0'));
 $settings['options']['orderedList'] = variable_get('orderedList', 0);
 $settings['options']['scrollSmooth'] = variable_get('scrollSmooth', 1);
-$settings['options']['scrollSmoothDuration'] = variable_get('scrollSmoothDuration', '420');
-$settings['options']['throttleTimeout'] = variable_get('throttleTimeout', '50');
+$settings['options']['scrollSmoothDuration'] = intval(variable_get('scrollSmoothDuration', '420'));
+$settings['options']['throttleTimeout'] = intval(variable_get('throttleTimeout', '50'));
 $settings['options']['positionFixedSelector'] = variable_get('positionFixedSelector', '.js-toc');
 $settings['options']['positionFixedClass'] = variable_get('positionFixedClass', 'is-position-fixed');
 $settings['options']['fixedSidebarOffset'] = variable_get('fixedSidebarOffset', 'auto');
