@@ -5,8 +5,9 @@
     attach: function attachTocBot(context, settings) {
       if (
         $(settings.tocbot.options.tocSelector).length &&
-        $(settings.tocbot.options.contentSelector + " :header").length >=
-          parseInt(settings.tocbot.minActivate)
+        $(settings.tocbot.options.contentSelector + " :header").not(
+          settings.tocbot.options.ignoreSelector
+        ).length >= parseInt(settings.tocbot.minActivate)
       ) {
         // Activate
         if (settings.tocbot.extrabodyclass.length > 0) {
