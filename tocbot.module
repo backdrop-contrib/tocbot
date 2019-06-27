@@ -3,8 +3,7 @@
 /**
  * Implements hook_menu().
  */
-function tocbot_menu()
-{
+function tocbot_menu() {
   $items['admin/config/content/default'] = array(
     'title' => 'Content',
     'type' => MENU_DEFAULT_LOCAL_TASK,
@@ -26,15 +25,15 @@ function tocbot_menu()
 /**
  * Implements hook_help().
  */
-function tocbot_help($path, $arg)
-{
+function tocbot_help($path, $arg) {
   switch ($path) {
     case 'admin/help#tocbot':
 
       $filepath = dirname(__FILE__) . '/README.md';
       if (file_exists($filepath)) {
         $readme = file_get_contents($filepath);
-      } else {
+      }
+      else {
         $filepath = dirname(__FILE__) . '/README.txt';
         if (file_exists($filepath)) {
           $readme = file_get_contents($filepath);
@@ -49,10 +48,12 @@ function tocbot_help($path, $arg)
 
         if (function_exists($info['process callback'])) {
           $output = $info['process callback']($readme, NULL);
-        } else {
+        }
+        else {
           $output = '<pre>' . $readme . '</pre>';
         }
-      } else {
+      }
+      else {
         $output = '<pre>' . $readme . '</pre>';
       }
 
@@ -63,8 +64,7 @@ function tocbot_help($path, $arg)
 /**
  * Configuration form to update module settings
  */
-function tocbot_config_form($form, $form_state)
-{
+function tocbot_config_form($form, $form_state) {
 
   $form['moduleSettings'] = array(
     '#type' => 'fieldset',
@@ -96,9 +96,7 @@ function tocbot_config_form($form, $form_state)
     '#default_value' => variable_get('tocbot_minActivate', '3'),
   ];
 
-  /**
-   * Tocbot Settings tab
-   */
+  // Tocbot Settings tab
   $form['tocbot_jsSettings'] = array(
     '#type' => 'fieldset',
     '#title' => t('TocBot JS Settings'),
@@ -246,8 +244,6 @@ function tocbot_config_form($form, $form_state)
     '#default_value' => variable_get('tocbot_includeHtml', 0),
   ];
 
-
-
   $form['actions']['submit'] = array(
     '#type' => 'submit',
     '#value' => t('Save'),
@@ -255,8 +251,10 @@ function tocbot_config_form($form, $form_state)
   return $form;
 }
 
-function tocbot_config_form_submit($form, $form_state)
-{
+/**
+ * Save Configuration form
+ */
+function tocbot_config_form_submit($form, $form_state) {
 
   $fieldsToSave = [
     'tocbot_extrabodyclass',
@@ -295,9 +293,7 @@ function tocbot_config_form_submit($form, $form_state)
  *
  * For defining external libraries.
  */
-
-function tocbot_libraries_info()
-{
+function tocbot_libraries_info() {
 
   // A very simple library.
   // Expected to be extracted into 'sites/all/libraries/tocbot'.
@@ -319,8 +315,7 @@ function tocbot_libraries_info()
 /**
  * Implements hook_block_info().
  */
-function tocbot_block_info()
-{
+function tocbot_block_info() {
 
   $blocks = array();
   $blocks['tocbot_block'] = array(
@@ -333,13 +328,8 @@ function tocbot_block_info()
 /**
  * Implements hook_block_view().
  */
-function tocbot_block_view($delta = '')
-{
+function tocbot_block_view($delta = '') {
   $settings = [];
-
-  // Load current configuration.
-  $selector = variable_get('tocbot_tocSelector', '.js-toc-block');
-
 
   // Gather settings to send to tocbot-init
   $settings['extrabodyclass'] = variable_get('tocbot_extrabodyclass', 'toc-is-active');
@@ -371,22 +361,35 @@ function tocbot_block_view($delta = '')
 
   // load library
   if (file_exists(libraries_get_path('tocbot') . '/sites/all/libraries/tocbot/js/tocbot.min.js')) {
-    $attached['js'] = array(libraries_get_path('tocbot') . '/sites/all/libraries/tocbot/js/tocbot.min.js' => array(
-      'weight' => -20,
-    ));
-  } else {
-    $attached['js'] = array("https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js" => array('type' => 'external', 'weight' => -20,));
+    $attached['js'] = array(
+      libraries_get_path('tocbot') . '/sites/all/libraries/tocbot/js/tocbot.min.js' => array(
+        'weight' => -20,
+      )
+    );
+  }
+  else {
+    $attached['js'] = array(
+      "https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js" => array(
+        'type' => 'external',
+        'weight' => -20,
+      )
+    );
   }
   // load css
   if (file_exists(libraries_get_path('tocbot') . '/sites/all/libraries/tocbot/css/tocbot.css')) {
-    $attached['css'] = array(libraries_get_path('tocbot') . '/sites/all/libraries/tocbot/css/tocbot.css' => array(
-      'weight' => -20,
-    ));
-  } else {
-    $attached['css'] = array('https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css' => array(
-      'type' => 'external',
-      'weight' => -20,
-    ));
+    $attached['css'] = array(
+      libraries_get_path('tocbot') . '/sites/all/libraries/tocbot/css/tocbot.css' => array(
+        'weight' => -20,
+      )
+    );
+  }
+  else {
+    $attached['css'] = array(
+      'https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css' => array(
+        'type' => 'external',
+        'weight' => -20,
+      )
+  );
   }
 
   $attached['js'][drupal_get_path('module', 'tocbot') . '/js/tocbot-init.js'] = array(
@@ -397,12 +400,10 @@ function tocbot_block_view($delta = '')
   //Send settings to Javascript
   $attached['js'][] = array('data' => array('tocbot' => $settings), 'type' => 'setting');
 
-
   $block = array();
 
   switch ($delta) {
     case 'tocbot_block':
-      // $block['subject'] = t('tocbot block');
       $block['content'] = array(
         '#markup' => tocbot_content(),
         '#attached' => $attached
@@ -412,10 +413,10 @@ function tocbot_block_view($delta = '')
 
   return $block;
 }
+
 /**
  * Implements hook_content().
  */
-function tocbot_content()
-{
+function tocbot_content() {
   return '<div class="js-toc-block-wrapper"><div class="js-toc-block"></div></div>';
 }

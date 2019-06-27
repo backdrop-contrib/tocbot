@@ -50,5 +50,5 @@
   ],
   "phpcs.enable": true,
   "phpcs.extensions": "php,module,inc,install,test,profile,theme",
-  "phpcs.standard": "C:/Users/Nick/AppData/Roaming/Composer/vendor/drupal/coder/coder_sniffer/Drupall",
+  "phpcs.standard": "C:/Users/Nick/AppData/Roaming/Composer/vendor/drupal/coder/coder_sniffer/Drupal",
 }
