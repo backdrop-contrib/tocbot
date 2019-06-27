@@ -5,3 +5,5 @@ package = Content
 configure = admin/config/content/tocbot
 
 files[] = tocbot.module
+
+Dependencies[] = libraries
