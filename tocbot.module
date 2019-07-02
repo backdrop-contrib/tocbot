@@ -399,18 +399,11 @@ function tocbot_block_view($delta = '') {
   switch ($delta) {
     case 'tocbot_block':
       $block['content'] = array(
-        '#markup' => tocbot_content(),
+        '#markup' => '<div class="js-toc-block-wrapper"><div class="js-toc-block"></div></div>',
         '#attached' => $attached
       );
       break;
   }
 
   return $block;
-}
-
-/**
- * Implements hook_content().
- */
-function tocbot_content() {
-  return '<div class="js-toc-block-wrapper"><div class="js-toc-block"></div></div>';
 }
