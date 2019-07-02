@@ -4,12 +4,6 @@
  * Implements hook_menu().
  */
 function tocbot_menu() {
-  $items['admin/config/content/default'] = array(
-    'title' => 'Content',
-    'type' => MENU_DEFAULT_LOCAL_TASK,
-    'weight' => -10,
-  );
-
   $items['admin/config/content/tocbot'] = array(
     'title' => 'Tocbot Configuration',
     'page callback' => 'drupal_get_form',
