@@ -1,6 +1,13 @@
+<?php
+
 /**
-* Implements hook_uninstall().
-*/
+ * @file
+ * Install file for tocbot.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
 function tocbot_uninstall() {
   variable_del('tocbot_extrabodyclass');
   variable_del('tocbot_tocTitle');
