@@ -122,8 +122,7 @@ function tocbot_config_form($form, $form_state) {
   $form['tocbot_jsSettings']['tocbot_headingSelector'] = [
     '#type' => 'textfield',
     '#title' => t('headingSelector'),
-    '#description' => t('Where to grab the headings to build the table of contents.
-    Comma and space seperated <code>h2, h3, h4, h5, h6</code>'),
+    '#description' => t('Comma and space seperated <code>h2, h3, h4, h5, h6</code>'),
     '#default_value' => variable_get('tocbot_headingSelector', 'h2, h3, h4, h5, h6'),
   ];
   $form['tocbot_jsSettings']['tocbot_ignoreSelector'] = [
@@ -218,7 +217,7 @@ function tocbot_config_form($form, $form_state) {
     '#type' => 'textfield',
     '#title' => t('positionFixedSelector'),
     '#description' => t('Element to add the positionFixedClass to.'),
-    '#default_value' => variable_get('tocbot_positionFixedSelector', '.js-toc'),
+    '#default_value' => variable_get('tocbot_positionFixedSelector', '.js-toc-block'),
   ];
   $form['tocbot_jsSettings']['tocbot_positionFixedClass'] = [
     '#type' => 'textfield',
@@ -351,7 +350,7 @@ function tocbot_block_view($delta = '') {
   $settings['options']['scrollSmooth'] = variable_get('tocbot_scrollSmooth', 1);
   $settings['options']['scrollSmoothDuration'] = intval(variable_get('tocbot_scrollSmoothDuration', '420'));
   $settings['options']['throttleTimeout'] = intval(variable_get('tocbot_throttleTimeout', '50'));
-  $settings['options']['positionFixedSelector'] = variable_get('tocbot_positionFixedSelector', '.js-toc');
+  $settings['options']['positionFixedSelector'] = variable_get('tocbot_positionFixedSelector', '.js-toc-block');
   $settings['options']['positionFixedClass'] = variable_get('tocbot_positionFixedClass', 'is-position-fixed');
   $settings['options']['fixedSidebarOffset'] = variable_get('tocbot_fixedSidebarOffset', 'auto');
   $settings['options']['includeHtml'] = variable_get('tocbot_includeHtml', 0);
@@ -363,7 +362,7 @@ function tocbot_block_view($delta = '') {
     $attached['js'] = array(
       libraries_get_path('tocbot') . '/sites/all/libraries/tocbot/js/tocbot.min.js' => array(
         'weight' => -20,
-      )
+      ),
     );
   }
   else {
@@ -371,7 +370,7 @@ function tocbot_block_view($delta = '') {
       "https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js" => array(
         'type' => 'external',
         'weight' => -20,
-      )
+      ),
     );
   }
   // Load css.
@@ -379,7 +378,7 @@ function tocbot_block_view($delta = '') {
     $attached['css'] = array(
       libraries_get_path('tocbot') . '/sites/all/libraries/tocbot/css/tocbot.css' => array(
         'weight' => -20,
-      )
+      ),
     );
   }
   else {
@@ -387,7 +386,7 @@ function tocbot_block_view($delta = '') {
       'https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css' => array(
         'type' => 'external',
         'weight' => -20,
-      )
+      ),
     );
   }
 
@@ -396,7 +395,7 @@ function tocbot_block_view($delta = '') {
     'weight' => 5,
   );
 
-  //Send settings to Javascript.
+  // Send settings to Javascript.
   $attached['js'][] = array('data' => array('tocbot' => $settings), 'type' => 'setting');
 
   $block = array();
@@ -405,7 +404,7 @@ function tocbot_block_view($delta = '') {
     case 'tocbot_block':
       $block['content'] = array(
         '#markup' => '<div class="js-toc-block-wrapper"><div class="js-toc-block"></div></div>',
-        '#attached' => $attached
+        '#attached' => $attached,
       );
       break;
   }
