@@ -6,4 +6,5 @@ configure = admin/config/content/tocbot
 
 files[] = tocbot.module
 
-Dependencies[] = libraries
+dependencies[] = libraries
+dependencies[] = drupal:system (>= 7.40)
