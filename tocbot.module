@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ * Creates and automatic table of contents using tocbot js library.
+ */
+
+/**
  * Implements hook_menu().
  */
 function tocbot_menu() {
@@ -56,7 +61,7 @@ function tocbot_help($path, $arg) {
 }
 
 /**
- * Configuration form to update module settings
+ * Configuration form to update module settings.
  */
 function tocbot_config_form($form, $form_state) {
 
@@ -246,7 +251,7 @@ function tocbot_config_form($form, $form_state) {
 }
 
 /**
- * Save Configuration form
+ * Save Configuration form.
  */
 function tocbot_config_form_submit($form, $form_state) {
 
@@ -325,9 +330,9 @@ function tocbot_block_info() {
 function tocbot_block_view($delta = '') {
   $settings = [];
 
-  // Gather settings to send to tocbot-init
+  // Gather settings to send to tocbot-init.
   $settings['extrabodyclass'] = variable_get('tocbot_extrabodyclass', 'toc-is-active');
-  $settings['tocTitle'] = variable_get('tocbot_tocTitle', 'Page Outline:');
+  $settings['tocTitle'] = check_plain(variable_get('tocbot_tocTitle', 'Page Outline:'));
   $settings['minActivate'] = intval(variable_get('tocbot_minActivate', '3'));
   $settings['options']['tocSelector'] = variable_get('tocbot_tocSelector', '.js-toc-block');
   $settings['options']['contentSelector'] = variable_get('tocbot_contentSelector', '#content');
@@ -353,7 +358,7 @@ function tocbot_block_view($delta = '') {
 
   $attached = array();
 
-  // load library
+  // Load library.
   if (file_exists(libraries_get_path('tocbot') . '/sites/all/libraries/tocbot/js/tocbot.min.js')) {
     $attached['js'] = array(
       libraries_get_path('tocbot') . '/sites/all/libraries/tocbot/js/tocbot.min.js' => array(
@@ -369,7 +374,7 @@ function tocbot_block_view($delta = '') {
       )
     );
   }
-  // load css
+  // Load css.
   if (file_exists(libraries_get_path('tocbot') . '/sites/all/libraries/tocbot/css/tocbot.css')) {
     $attached['css'] = array(
       libraries_get_path('tocbot') . '/sites/all/libraries/tocbot/css/tocbot.css' => array(
@@ -383,7 +388,7 @@ function tocbot_block_view($delta = '') {
         'type' => 'external',
         'weight' => -20,
       )
-  );
+    );
   }
 
   $attached['js'][drupal_get_path('module', 'tocbot') . '/js/tocbot-init.js'] = array(
@@ -391,7 +396,7 @@ function tocbot_block_view($delta = '') {
     'weight' => 5,
   );
 
-  //Send settings to Javascript
+  //Send settings to Javascript.
   $attached['js'][] = array('data' => array('tocbot' => $settings), 'type' => 'setting');
 
   $block = array();

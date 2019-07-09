@@ -1,0 +1,28 @@
+/**
+* Implements hook_uninstall().
+*/
+function tocbot_uninstall() {
+  variable_del('tocbot_extrabodyclass');
+  variable_del('tocbot_tocTitle');
+  variable_del('tocbot_minActivate');
+  variable_del('tocbot_tocSelector');
+  variable_del('tocbot_contentSelector');
+  variable_del('tocbot_headingSelector');
+  variable_del('tocbot_ignoreSelector');
+  variable_del('tocbot_linkClass');
+  variable_del('tocbot_extraLinkClasses');
+  variable_del('tocbot_activeLinkClass');
+  variable_del('tocbot_listClass');
+  variable_del('tocbot_extraListClasses');
+  variable_del('tocbot_isCollapsedClass');
+  variable_del('tocbot_collapsibleClass');
+  variable_del('tocbot_listItemClass');
+  variable_del('tocbot_collapseDepth');
+  variable_del('tocbot_orderedList');
+  variable_del('tocbot_scrollSmooth');
+  variable_del('tocbot_scrollSmoothDuration');
+  variable_del('tocbot_throttleTimeout');
+  variable_del('tocbot_positionFixedSelector');
+  variable_del('tocbot_positionFixedClass');
+  variable_del('tocbot_fixedSidebarOffset');
+}
