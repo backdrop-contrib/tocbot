@@ -94,8 +94,16 @@ function tocbot_config_form($form, $form_state) {
     headings'),
     '#default_value' => variable_get('tocbot_minActivate', '3'),
   ];
+  $form['moduleSettings']['tocbot_createAutoIds'] = [
+    '#type' => 'checkbox',
+    '#title' => t('Create Automatic Ids'),
+    '#description' => t('Using Javascript automatic Ids can be created needed
+    for Tocbot to work, or disable it if you have another means of creating ids
+    such as a text filter module'),
+    '#default_value' => variable_get('tocbot_createAutoIds', 1),
+  ];
 
-  // Tocbot Settings tab
+  // Tocbot Settings tab.
   $form['tocbot_jsSettings'] = array(
     '#type' => 'fieldset',
     '#title' => t('TocBot JS Settings'),
@@ -216,8 +224,8 @@ function tocbot_config_form($form, $form_state) {
   $form['tocbot_jsSettings']['tocbot_positionFixedSelector'] = [
     '#type' => 'textfield',
     '#title' => t('positionFixedSelector'),
-    '#description' => t('Element to add the positionFixedClass to.'),
-    '#default_value' => variable_get('tocbot_positionFixedSelector', '.js-toc-block'),
+    '#description' => t('Element to add the positionFixedClass to such as the .js-toc-block class.'),
+    '#default_value' => variable_get('tocbot_positionFixedSelector', ''),
   ];
   $form['tocbot_jsSettings']['tocbot_positionFixedClass'] = [
     '#type' => 'textfield',
@@ -258,6 +266,7 @@ function tocbot_config_form_submit($form, $form_state) {
     'tocbot_extrabodyclass',
     'tocbot_tocTitle',
     'tocbot_minActivate',
+    'tocbot_createAutoIds',
     'tocbot_tocSelector',
     'tocbot_contentSelector',
     'tocbot_headingSelector',
@@ -333,6 +342,7 @@ function tocbot_block_view($delta = '') {
   $settings['extrabodyclass'] = variable_get('tocbot_extrabodyclass', 'toc-is-active');
   $settings['tocTitle'] = check_plain(variable_get('tocbot_tocTitle', 'Page Outline:'));
   $settings['minActivate'] = intval(variable_get('tocbot_minActivate', '3'));
+  $settings['createAutoIds'] = variable_get('tocbot_createAutoIds', 1);
   $settings['options']['tocSelector'] = variable_get('tocbot_tocSelector', '.js-toc-block');
   $settings['options']['contentSelector'] = variable_get('tocbot_contentSelector', '#content');
   $settings['options']['headingSelector'] = variable_get('tocbot_headingSelector', 'h2, h3, h4, h5, h6');
@@ -350,7 +360,7 @@ function tocbot_block_view($delta = '') {
   $settings['options']['scrollSmooth'] = variable_get('tocbot_scrollSmooth', 1);
   $settings['options']['scrollSmoothDuration'] = intval(variable_get('tocbot_scrollSmoothDuration', '420'));
   $settings['options']['throttleTimeout'] = intval(variable_get('tocbot_throttleTimeout', '50'));
-  $settings['options']['positionFixedSelector'] = variable_get('tocbot_positionFixedSelector', '.js-toc-block');
+  $settings['options']['positionFixedSelector'] = variable_get('tocbot_positionFixedSelector', '');
   $settings['options']['positionFixedClass'] = variable_get('tocbot_positionFixedClass', 'is-position-fixed');
   $settings['options']['fixedSidebarOffset'] = variable_get('tocbot_fixedSidebarOffset', 'auto');
   $settings['options']['includeHtml'] = variable_get('tocbot_includeHtml', 0);
@@ -358,7 +368,7 @@ function tocbot_block_view($delta = '') {
   $attached = array();
 
   // Load library.
-  if (file_exists(libraries_get_path('tocbot') . '/sites/all/libraries/tocbot/js/tocbot.min.js')) {
+  if (function_exists('libraries_get_path') && file_exists(libraries_get_path('tocbot') . '/sites/all/libraries/tocbot/js/tocbot.min.js')) {
     $attached['js'] = array(
       libraries_get_path('tocbot') . '/sites/all/libraries/tocbot/js/tocbot.min.js' => array(
         'weight' => -20,
@@ -374,7 +384,7 @@ function tocbot_block_view($delta = '') {
     );
   }
   // Load css.
-  if (file_exists(libraries_get_path('tocbot') . '/sites/all/libraries/tocbot/css/tocbot.css')) {
+  if (function_exists('libraries_get_path') && file_exists(libraries_get_path('tocbot') . '/sites/all/libraries/tocbot/css/tocbot.css')) {
     $attached['css'] = array(
       libraries_get_path('tocbot') . '/sites/all/libraries/tocbot/css/tocbot.css' => array(
         'weight' => -20,
