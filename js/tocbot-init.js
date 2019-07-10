@@ -28,12 +28,30 @@
           $('body').addClass(settings.tocbot.extrabodyclass);
         }
 
+        // fix tocbot offsettop bug
+        if (settings.tocbot.options.fixedSidebarOffset === "auto") {
+          var element = document.querySelector(
+            settings.tocbot.options.tocSelector
+          );
+          var yPosition = 0;
+
+            while (element) {
+              yPosition +=
+                element.offsetTop -
+                element.scrollTop +
+                element.clientTop;
+              element = element.offsetParent;
+            }
+
+          settings.tocbot.options.fixedSidebarOffset = yPosition;
+        }
+
         tocbot.init(settings.tocbot.options);
         if (settings.tocbot.tocTitle.length > 0) {
-          $('.js-toc').prepend(
-            '<strong class=\'toc-title\'>' +
+          $(settings.tocbot.options.tocSelector).prepend(
+            "<strong class='toc-title'>" +
               settings.tocbot.tocTitle +
-              '</strong>'
+              "</strong>"
           );
         }
       }

@@ -4,7 +4,8 @@
 
 This module provides a wrapper around Tocbot which builds an automatic table of
 contents (TOC) from headings in an HTML document. This is useful for
-documentation websites or long markdown pages because it makes them easier to navigate.
+documentation websites or long markdown pages because it makes them easier
+to navigate.
 
 - A block is created that will contain the automatic table of contents or
 specify you own location such as an empty div tag in you .tpl files.

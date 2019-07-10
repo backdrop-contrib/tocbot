@@ -397,6 +397,7 @@ function tocbot_block_view($delta = '') {
         'type' => 'external',
         'weight' => -20,
       ),
+      drupal_get_path('module', 'tocbot') . '/css/tocbot-style.css' => array(),
     );
   }
 
