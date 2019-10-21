@@ -11,8 +11,8 @@
 function tocbot_menu() {
   $items['admin/config/content/tocbot'] = array(
     'title' => 'Tocbot Configuration',
-    'page callback' => 'drupal_get_form',
-    'page arguments'  => array('tocbot_config_form'),
+    'page callback' => 'backdrop_get_form',
+    'page arguments' => array('tocbot_config_form'),
     'access arguments' => array('administer site configuration'),
     'type' => MENU_LOCAL_TASK,
     'weight' => -9,
@@ -61,9 +61,20 @@ function tocbot_help($path, $arg) {
 }
 
 /**
+ * Implements hook_config_info().
+ */
+function tocbot_config_info() {
+  $prefixes['tocbot.settings'] = array(
+    'label' => t('Module name settings'),
+    'group' => t('Configuration'),
+  );
+}
+
+/**
  * Configuration form to update module settings.
  */
 function tocbot_config_form($form, $form_state) {
+  $config = config('tocbot.settings');
 
   $form['moduleSettings'] = array(
     '#type' => 'fieldset',
@@ -72,35 +83,35 @@ function tocbot_config_form($form, $form_state) {
     '#collapsible' => FALSE,
     '#collapsed' => FALSE,
   );
-  $form['moduleSettings']['tocbot_extrabodyclass'] = [
-    '#type' => 'textfield',
-    '#title' => t('Extra Body Class on Activation'),
-    '#description' => t('When the tocbot is activated you can add an extra class
+  $form['moduleSettings']['tocbot_extrabodyclass'] =[
+    '#type' 'textfield'
+    '#title' t('Extra Body Class on Activation')
+    '#description' t('When the tocbot is activated you can add an extra class
      to the body to adjust the theme of your site if desired. Leave blank if you
-      dont need this.'),
-    '#default_value' => variable_get('tocbot_extrabodyclass', 'toc-is-active'),
+      dont need this.')
+    '#default_value' $config->get('tocbot_extrabodyclass')
   ];
-  $form['moduleSettings']['tocbot_tocTitle'] = [
-    '#type' => 'textfield',
-    '#title' => t('tocTitle'),
-    '#description' => t('An optional title for the TOC, leave blank for none.
-    Will be an strong tag with class <code>toc-title</code> so you can theme it'),
-    '#default_value' => variable_get('tocbot_tocTitle', 'Page Outline:'),
+  $form['moduleSettings']['tocbot_tocTitle'] =[
+    '#type' 'textfield'
+    '#title' t('tocTitle')
+    '#description' t('An optional title for the TOC, leave blank for none.
+    Will be an strong tag with class <code>toc-title</code> so you can theme it')
+    '#default_value' $config->get('tocbot_tocTitle')
   ];
-  $form['moduleSettings']['tocbot_minActivate'] = [
-    '#type' => 'textfield',
-    '#title' => t('minActivate (number)'),
-    '#description' => t('Only activate if greater than or equal to this many
-    headings'),
-    '#default_value' => variable_get('tocbot_minActivate', '3'),
+  $form['moduleSettings']['tocbot_minActivate'] =[
+    '#type' 'textfield'
+    '#title' t('minActivate (number)')
+    '#description' t('Only activate if greater than or equal to this many
+    headings')
+    '#default_value' $config->get('tocbot_minActivate')
   ];
-  $form['moduleSettings']['tocbot_createAutoIds'] = [
-    '#type' => 'checkbox',
-    '#title' => t('Create Automatic Ids'),
-    '#description' => t('Using Javascript automatic Ids can be created needed
+  $form['moduleSettings']['tocbot_createAutoIds'] =[
+    '#type' 'checkbox'
+    '#title' t('Create Automatic Ids')
+    '#description' t('Using Javascript automatic Ids can be created needed
     for Tocbot to work, or disable it if you have another means of creating ids
-    such as a text filter module'),
-    '#default_value' => variable_get('tocbot_createAutoIds', 1),
+    such as a text filter module')
+    '#default_value' $config->get('tocbot_createAutoIds')
   ];
 
   // Tocbot Settings tab.
@@ -112,142 +123,142 @@ function tocbot_config_form($form, $form_state) {
     '#collapsible' => FALSE,
     '#collapsed' => FALSE,
   );
-  $form['tocbot_jsSettings']['tocbot_tocSelector'] = [
-    '#type' => 'textfield',
-    '#title' => t('tocSelector'),
-    '#description' => t('Where to render the table of contents. Place an empty
+  $form['tocbot_jsSettings']['tocbot_tocSelector'] =[
+    '#type' 'textfield'
+    '#title' t('tocSelector')
+    '#description' t('Where to render the table of contents. Place an empty
     div with a unique class into your theme template or use this block itself
-    by settings it to <code>.js-toc-block</code>.'),
-    '#default_value' => variable_get('tocbot_tocSelector', '.js-toc-block'),
+    by settings it to <code>.js-toc-block</code>.')
+    '#default_value' $config->get('tocbot_tocSelector')
   ];
-  $form['tocbot_jsSettings']['tocbot_contentSelector'] = [
-    '#type' => 'textfield',
-    '#title' => t('contentSelector'),
-    '#description' => t('Where to grab the headings to build the table of
-    contents.'),
-    '#default_value' => variable_get('tocbot_contentSelector', '#content'),
+  $form['tocbot_jsSettings']['tocbot_contentSelector'] =[
+    '#type' 'textfield'
+    '#title' t('contentSelector')
+    '#description' t('Where to grab the headings to build the table of
+    contents.')
+    '#default_value' $config->get('tocbot_contentSelector')
   ];
-  $form['tocbot_jsSettings']['tocbot_headingSelector'] = [
-    '#type' => 'textfield',
-    '#title' => t('headingSelector'),
-    '#description' => t('Comma and space seperated <code>h2, h3, h4, h5, h6</code>'),
-    '#default_value' => variable_get('tocbot_headingSelector', 'h2, h3, h4, h5, h6'),
+  $form['tocbot_jsSettings']['tocbot_headingSelector'] =[
+    '#type' 'textfield'
+    '#title' t('headingSelector')
+    '#description' t('Comma and space seperated <code>h2, h3, h4, h5, h6</code>')
+    '#default_value' $config->get('tocbot_headingSelector')
   ];
-  $form['tocbot_jsSettings']['tocbot_ignoreSelector'] = [
-    '#type' => 'textfield',
-    '#title' => t('ignoreSelector'),
-    '#description' => t('Headings that match the ignoreSelector will be skipped.'),
-    '#default_value' => variable_get('tocbot_ignoreSelector', '.js-toc-ignore'),
+  $form['tocbot_jsSettings']['tocbot_ignoreSelector'] =[
+    '#type' 'textfield'
+    '#title' t('ignoreSelector')
+    '#description' t('Headings that match the ignoreSelector will be skipped.')
+    '#default_value' $config->get('tocbot_ignoreSelector')
   ];
-  $form['tocbot_jsSettings']['tocbot_linkClass'] = [
-    '#type' => 'textfield',
-    '#title' => t('linkClass'),
-    '#description' => t('Main class to add to links.'),
-    '#default_value' => variable_get('tocbot_linkClass', 'toc-link'),
+  $form['tocbot_jsSettings']['tocbot_linkClass'] =[
+    '#type' 'textfield'
+    '#title' t('linkClass')
+    '#description' t('Main class to add to links.')
+    '#default_value' $config->get('tocbot_linkClass')
   ];
-  $form['tocbot_jsSettings']['tocbot_extraLinkClasses'] = [
-    '#type' => 'textfield',
-    '#title' => t('extraLinkClasses'),
-    '#description' => t('Extra classes to add to links.'),
-    '#default_value' => variable_get('tocbot_extraLinkClasses', ''),
+  $form['tocbot_jsSettings']['tocbot_extraLinkClasses'] =[
+    '#type' 'textfield'
+    '#title' t('extraLinkClasses')
+    '#description' t('Extra classes to add to links.')
+    '#default_value' $config->get('tocbot_extraLinkClasses')
   ];
-  $form['tocbot_jsSettings']['tocbot_activeLinkClass'] = [
-    '#type' => 'textfield',
-    '#title' => t('activeLinkClass'),
-    '#description' => t('Class to add to active links, the link corresponding
-    to the top most heading on the page.'),
-    '#default_value' => variable_get('tocbot_activeLinkClass', 'is-active-link'),
+  $form['tocbot_jsSettings']['tocbot_activeLinkClass'] =[
+    '#type' 'textfield'
+    '#title' t('activeLinkClass')
+    '#description' t('Class to add to active links, the link corresponding
+    to the top most heading on the page.')
+    '#default_value' $config->get('tocbot_activeLinkClass')
   ];
-  $form['tocbot_jsSettings']['tocbot_listClass'] = [
-    '#type' => 'textfield',
-    '#title' => t('listClass'),
-    '#description' => t('Main class to add to lists.'),
-    '#default_value' => variable_get('tocbot_listClass', 'toc-list'),
+  $form['tocbot_jsSettings']['tocbot_listClass'] =[
+    '#type' 'textfield'
+    '#title' t('listClass')
+    '#description' t('Main class to add to lists.')
+    '#default_value' $config->get('tocbot_listClass')
   ];
-  $form['tocbot_jsSettings']['tocbot_extraListClasses'] = [
-    '#type' => 'textfield',
-    '#title' => t('extraListClasses'),
-    '#description' => t('Extra classes to add to lists.'),
-    '#default_value' => variable_get('tocbot_extraListClasses', ''),
+  $form['tocbot_jsSettings']['tocbot_extraListClasses'] =[
+    '#type' 'textfield'
+    '#title' t('extraListClasses')
+    '#description' t('Extra classes to add to lists.')
+    '#default_value' $config->get('tocbot_extraListClasses')
   ];
-  $form['tocbot_jsSettings']['tocbot_isCollapsedClass'] = [
-    '#type' => 'textfield',
-    '#title' => t('isCollapsedClass'),
-    '#description' => t('Class that gets added when a list should be collapsed.'),
-    '#default_value' => variable_get('tocbot_isCollapsedClass', 'is-collapsed'),
+  $form['tocbot_jsSettings']['tocbot_isCollapsedClass'] =[
+    '#type' 'textfield'
+    '#title' t('isCollapsedClass')
+    '#description' t('Class that gets added when a list should be collapsed.')
+    '#default_value' $config->get('tocbot_isCollapsedClass')
   ];
-  $form['tocbot_jsSettings']['tocbot_collapsibleClass'] = [
-    '#type' => 'textfield',
-    '#title' => t('collapsibleClass'),
-    '#description' => t('Class that gets added when a list should be able to be
-    collapsed but isn\'t necessarily collapsed.'),
-    '#default_value' => variable_get('tocbot_collapsibleClass', 'is-collapsible'),
+  $form['tocbot_jsSettings']['tocbot_collapsibleClass'] =[
+    '#type' 'textfield'
+    '#title' t('collapsibleClass')
+    '#description' t('Class that gets added when a list should be able to be
+    collapsed but isn\'t necessarily collapsed.')
+    '#default_value' $config->get('tocbot_collapsibleClass')
   ];
-  $form['tocbot_jsSettings']['tocbot_listItemClass'] = [
-    '#type' => 'textfield',
-    '#title' => t('listItemClass'),
-    '#description' => t('Class to add to list items.'),
-    '#default_value' => variable_get('tocbot_listItemClass', 'toc-list-item'),
+  $form['tocbot_jsSettings']['tocbot_listItemClass'] =[
+    '#type' 'textfield'
+    '#title' t('listItemClass')
+    '#description' t('Class to add to list items.')
+    '#default_value' $config->get('tocbot_listItemClass')
   ];
-  $form['tocbot_jsSettings']['tocbot_collapseDepth'] = [
-    '#type' => 'textfield',
-    '#title' => t('collapseDepth (number)'),
-    '#description' => t('Class to add to list items.'),
-    '#default_value' => variable_get('tocbot_collapseDepth', '0'),
+  $form['tocbot_jsSettings']['tocbot_collapseDepth'] =[
+    '#type' 'textfield'
+    '#title' t('collapseDepth (number)')
+    '#description' t('Class to add to list items.')
+    '#default_value' $config->get('tocbot_collapseDepth')
   ];
-  $form['tocbot_jsSettings']['tocbot_orderedList'] = [
-    '#type' => 'checkbox',
-    '#title' => t('orderedList'),
-    '#description' => t('OrderedList can be set to false to generate unordered
-    lists (ul) instead of ordered lists (ol).'),
-    '#default_value' => variable_get('tocbot_orderedList', 0),
+  $form['tocbot_jsSettings']['tocbot_orderedList'] =[
+    '#type' 'checkbox'
+    '#title' t('orderedList')
+    '#description' t('OrderedList can be set to false to generate unordered
+    lists (ul) instead of ordered lists (ol).')
+    '#default_value' $config->get('tocbot_orderedList')
   ];
-  $form['tocbot_jsSettings']['tocbot_scrollSmooth'] = [
-    '#type' => 'checkbox',
-    '#title' => t('scrollSmooth'),
-    '#description' => t('Smooth scrolling enabled.'),
-    '#default_value' => variable_get('tocbot_scrollSmooth', 1),
+  $form['tocbot_jsSettings']['tocbot_scrollSmooth'] =[
+    '#type' 'checkbox'
+    '#title' t('scrollSmooth')
+    '#description' t('Smooth scrolling enabled.')
+    '#default_value' $config->get('tocbot_scrollSmooth')
   ];
-  $form['tocbot_jsSettings']['tocbot_scrollSmoothDuration'] = [
-    '#type' => 'textfield',
-    '#title' => t('scrollSmoothDuration (number)'),
-    '#description' => t('Smooth scroll duration.'),
-    '#default_value' => variable_get('tocbot_scrollSmoothDuration', '420'),
+  $form['tocbot_jsSettings']['tocbot_scrollSmoothDuration'] =[
+    '#type' 'textfield'
+    '#title' t('scrollSmoothDuration (number)')
+    '#description' t('Smooth scroll duration.')
+    '#default_value' $config->get('tocbot_scrollSmoothDuration')
   ];
-  $form['tocbot_jsSettings']['tocbot_throttleTimeout'] = [
-    '#type' => 'textfield',
-    '#title' => t('throttleTimeout (number)'),
-    '#description' => t('Timeout between events firing to make sure its not too
-    rapid (for performance reasons)'),
-    '#default_value' => variable_get('tocbot_throttleTimeout', '50'),
+  $form['tocbot_jsSettings']['tocbot_throttleTimeout'] =[
+    '#type' 'textfield'
+    '#title' t('throttleTimeout (number)')
+    '#description' t('Timeout between events firing to make sure its not too
+    rapid (for performance reasons)')
+    '#default_value' $config->get('tocbot_throttleTimeout')
   ];
-  $form['tocbot_jsSettings']['tocbot_positionFixedSelector'] = [
-    '#type' => 'textfield',
-    '#title' => t('positionFixedSelector'),
-    '#description' => t('Element to add the positionFixedClass to such as the .js-toc-block class.'),
-    '#default_value' => variable_get('tocbot_positionFixedSelector', ''),
+  $form['tocbot_jsSettings']['tocbot_positionFixedSelector'] =[
+    '#type' 'textfield'
+    '#title' t('positionFixedSelector')
+    '#description' t('Element to add the positionFixedClass to such as the .js-toc-block class.')
+    '#default_value' $config->get('tocbot_positionFixedSelector')
   ];
-  $form['tocbot_jsSettings']['tocbot_positionFixedClass'] = [
-    '#type' => 'textfield',
-    '#title' => t('positionFixedClass'),
-    '#description' => t('Fixed position class to add to make sidebar fixed after
-    scrolling down past the fixedSidebarOffset.'),
-    '#default_value' => variable_get('tocbot_positionFixedClass', 'is-position-fixed'),
+  $form['tocbot_jsSettings']['tocbot_positionFixedClass'] =[
+    '#type' 'textfield'
+    '#title' t('positionFixedClass')
+    '#description' t('Fixed position class to add to make sidebar fixed after
+    scrolling down past the fixedSidebarOffset.')
+    '#default_value' $config->get('tocbot_positionFixedClass')
   ];
-  $form['tocbot_jsSettings']['tocbot_fixedSidebarOffset'] = [
-    '#type' => 'textfield',
-    '#title' => t('fixedSidebarOffset'),
-    '#description' => t('fixedSidebarOffset can be any number but by default
+  $form['tocbot_jsSettings']['tocbot_fixedSidebarOffset'] =[
+    '#type' 'textfield'
+    '#title' t('fixedSidebarOffset')
+    '#description' t('fixedSidebarOffset can be any number but by default
     is set to auto which sets the fixedSidebarOffset to the sidebar elements
-    offsetTop from the top of the document on init.'),
-    '#default_value' => variable_get('tocbot_fixedSidebarOffset', 'auto'),
+    offsetTop from the top of the document on init.')
+    '#default_value' $config->get('tocbot_fixedSidebarOffset')
   ];
-  $form['tocbot_jsSettings']['tocbot_includeHtml'] = [
-    '#type' => 'checkbox',
-    '#title' => t('includeHtml'),
-    '#description' => t('includeHtml can be set to true to include the HTML
-    markup from the heading node instead of just including the textContent.'),
-    '#default_value' => variable_get('tocbot_includeHtml', 0),
+  $form['tocbot_jsSettings']['tocbot_includeHtml'] =[
+    '#type' 'checkbox'
+    '#title' t('includeHtml')
+    '#description' t('includeHtml can be set to true to include the HTML
+    markup from the heading node instead of just including the textContent.')
+    '#default_value' $config->get('tocbot_includeHtml')
   ];
 
   $form['actions']['submit'] = array(
@@ -262,35 +273,36 @@ function tocbot_config_form($form, $form_state) {
  */
 function tocbot_config_form_submit($form, $form_state) {
 
-  $fieldsToSave = [
-    'tocbot_extrabodyclass',
-    'tocbot_tocTitle',
-    'tocbot_minActivate',
-    'tocbot_createAutoIds',
-    'tocbot_tocSelector',
-    'tocbot_contentSelector',
-    'tocbot_headingSelector',
-    'tocbot_ignoreSelector',
-    'tocbot_linkClass',
-    'tocbot_extraLinkClasses',
-    'tocbot_activeLinkClass',
-    'tocbot_listClass',
-    'tocbot_extraListClasses',
-    'tocbot_isCollapsedClass',
-    'tocbot_collapsibleClass',
-    'tocbot_listItemClass',
-    'tocbot_collapseDepth',
-    'tocbot_orderedList',
-    'tocbot_scrollSmooth',
-    'tocbot_scrollSmoothDuration',
-    'tocbot_throttleTimeout',
-    'tocbot_positionFixedSelector',
-    'tocbot_positionFixedClass',
-    'tocbot_fixedSidebarOffset',
+  $fieldsToSave =[
+    'tocbot_extrabodyclass'
+    'tocbot_tocTitle'
+    'tocbot_minActivate'
+    'tocbot_createAutoIds'
+    'tocbot_tocSelector'
+    'tocbot_contentSelector'
+    'tocbot_headingSelector'
+    'tocbot_ignoreSelector'
+    'tocbot_linkClass'
+    'tocbot_extraLinkClasses'
+    'tocbot_activeLinkClass'
+    'tocbot_listClass'
+    'tocbot_extraListClasses'
+    'tocbot_isCollapsedClass'
+    'tocbot_collapsibleClass'
+    'tocbot_listItemClass'
+    'tocbot_collapseDepth'
+    'tocbot_orderedList'
+    'tocbot_scrollSmooth'
+    'tocbot_scrollSmoothDuration'
+    'tocbot_throttleTimeout'
+    'tocbot_positionFixedSelector'
+    'tocbot_positionFixedClass'
+    'tocbot_fixedSidebarOffset'
   ];
 
   foreach ($fieldsToSave as $value) {
     $formValue = $form_state['values'][$value];
+    // TODO This variable was probably removed in Backdrop without replacement.
     variable_set($value, $formValue);
   }
 }
@@ -336,34 +348,35 @@ function tocbot_block_info() {
  * Implements hook_block_view().
  */
 function tocbot_block_view($delta = '') {
-  $settings = [];
+  $config = config('tocbot.settings');
+  $settings =[];
 
   // Gather settings to send to tocbot-init.
-  $settings['extrabodyclass'] = variable_get('tocbot_extrabodyclass', 'toc-is-active');
-  $settings['tocTitle'] = check_plain(variable_get('tocbot_tocTitle', 'Page Outline:'));
-  $settings['minActivate'] = intval(variable_get('tocbot_minActivate', '3'));
-  $settings['createAutoIds'] = variable_get('tocbot_createAutoIds', 1);
-  $settings['options']['tocSelector'] = variable_get('tocbot_tocSelector', '.js-toc-block');
-  $settings['options']['contentSelector'] = variable_get('tocbot_contentSelector', '#content');
-  $settings['options']['headingSelector'] = variable_get('tocbot_headingSelector', 'h2, h3, h4, h5, h6');
-  $settings['options']['ignoreSelector'] = variable_get('tocbot_ignoreSelector', '.js-toc-ignore');
-  $settings['options']['linkClass'] = variable_get('tocbot_linkClass', 'toc-link');
-  $settings['options']['extraLinkClasses'] = variable_get('tocbot_extraLinkClasses', '');
-  $settings['options']['activeLinkClass'] = variable_get('tocbot_activeLinkClass', 'is-active-link');
-  $settings['options']['listClass'] = variable_get('tocbot_listClass', 'toc-list');
-  $settings['options']['extraListClasses'] = variable_get('tocbot_extraListClasses', '');
-  $settings['options']['isCollapsedClass'] = variable_get('tocbot_isCollapsedClass', 'is-collapsed');
-  $settings['options']['collapsibleClass'] = variable_get('tocbot_collapsibleClass', 'is-collapsible');
-  $settings['options']['listItemClass'] = variable_get('tocbot_listItemClass', 'toc-list-item');
-  $settings['options']['collapseDepth'] = intval(variable_get('tocbot_collapseDepth', '0'));
-  $settings['options']['orderedList'] = variable_get('tocbot_orderedList', 0);
-  $settings['options']['scrollSmooth'] = variable_get('tocbot_scrollSmooth', 1);
-  $settings['options']['scrollSmoothDuration'] = intval(variable_get('tocbot_scrollSmoothDuration', '420'));
-  $settings['options']['throttleTimeout'] = intval(variable_get('tocbot_throttleTimeout', '50'));
-  $settings['options']['positionFixedSelector'] = variable_get('tocbot_positionFixedSelector', '');
-  $settings['options']['positionFixedClass'] = variable_get('tocbot_positionFixedClass', 'is-position-fixed');
-  $settings['options']['fixedSidebarOffset'] = variable_get('tocbot_fixedSidebarOffset', 'auto');
-  $settings['options']['includeHtml'] = variable_get('tocbot_includeHtml', 0);
+  $settings['extrabodyclass'] = $config->get('tocbot_extrabodyclass');
+  $settings['tocTitle'] = check_plain($config->get('tocbot_tocTitle'));
+  $settings['minActivate'] = intval($config->get('tocbot_minActivate'));
+  $settings['createAutoIds'] = $config->get('tocbot_createAutoIds');
+  $settings['options']['tocSelector'] = $config->get('tocbot_tocSelector');
+  $settings['options']['contentSelector'] = $config->get('tocbot_contentSelector');
+  $settings['options']['headingSelector'] = $config->get('tocbot_headingSelector');
+  $settings['options']['ignoreSelector'] = $config->get('tocbot_ignoreSelector');
+  $settings['options']['linkClass'] = $config->get('tocbot_linkClass');
+  $settings['options']['extraLinkClasses'] = $config->get('tocbot_extraLinkClasses');
+  $settings['options']['activeLinkClass'] = $config->get('tocbot_activeLinkClass');
+  $settings['options']['listClass'] = $config->get('tocbot_listClass');
+  $settings['options']['extraListClasses'] = $config->get('tocbot_extraListClasses');
+  $settings['options']['isCollapsedClass'] = $config->get('tocbot_isCollapsedClass');
+  $settings['options']['collapsibleClass'] = $config->get('tocbot_collapsibleClass');
+  $settings['options']['listItemClass'] = $config->get('tocbot_listItemClass');
+  $settings['options']['collapseDepth'] = intval($config->get('tocbot_collapseDepth'));
+  $settings['options']['orderedList'] = $config->get('tocbot_orderedList');
+  $settings['options']['scrollSmooth'] = $config->get('tocbot_scrollSmooth');
+  $settings['options']['scrollSmoothDuration'] = intval($config->get('tocbot_scrollSmoothDuration'));
+  $settings['options']['throttleTimeout'] = intval($config->get('tocbot_throttleTimeout'));
+  $settings['options']['positionFixedSelector'] = $config->get('tocbot_positionFixedSelector');
+  $settings['options']['positionFixedClass'] = $config->get('tocbot_positionFixedClass');
+  $settings['options']['fixedSidebarOffset'] = $config->get('tocbot_fixedSidebarOffset');
+  $settings['options']['includeHtml'] = $config->get('tocbot_includeHtml');
 
   $attached = array();
 
@@ -397,17 +410,20 @@ function tocbot_block_view($delta = '') {
         'type' => 'external',
         'weight' => -20,
       ),
-      drupal_get_path('module', 'tocbot') . '/css/tocbot-style.css' => array(),
+      backdrop_get_path('module', 'tocbot') . '/css/tocbot-style.css' => array(),
     );
   }
 
-  $attached['js'][drupal_get_path('module', 'tocbot') . '/js/tocbot-init.js'] = array(
+  $attached['js'][backdrop_get_path('module', 'tocbot') . '/js/tocbot-init.js'] = array(
     'scope' => 'footer',
     'weight' => 5,
   );
 
   // Send settings to Javascript.
-  $attached['js'][] = array('data' => array('tocbot' => $settings), 'type' => 'setting');
+  $attached['js'][] = array(
+    'data' => array('tocbot' => $settings),
+    'type' => 'setting',
+  );
 
   $block = array();
 

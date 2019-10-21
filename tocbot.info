@@ -1,6 +1,7 @@
 name = Tocbot
 description = This module adds tocbot - Automatic Table of contents from headings
-core = 7.x
+backdrop = 1.x
+type = module
 package = Content
 configure = admin/config/content/tocbot
 
