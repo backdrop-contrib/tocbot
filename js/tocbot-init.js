@@ -1,7 +1,7 @@
 (function($) {
   'use strict';
 
-  Drupal.behaviors.tocbot = {
+  Backdrop.behaviors.tocbot = {
     attach: function attachTocBot(context, settings) {
       if (settings.tocbot.createAutoIds) {
         // Create automatic ids
