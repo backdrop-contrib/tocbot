@@ -3,6 +3,4 @@ description = This module adds tocbot - Automatic Table of contents from heading
 backdrop = 1.x
 type = module
 package = Content
-configure = admin/config/content/tocbot
-
-dependencies[] = drupal:system (>= 7.40)
+configure = admin/config/content/tocbot)
