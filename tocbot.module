@@ -10,12 +10,12 @@
  */
 function tocbot_menu() {
   $items['admin/config/content/tocbot'] = array(
-    'title' => 'Tocbot Configuration',
+    'title' => 'Tocbot',
+    'description' => 'Adjust the Tocbot module and JavaScript settings to customize your automatic tables of contents (TOC).',
     'page callback' => 'backdrop_get_form',
     'page arguments' => array('tocbot_config_form'),
     'access arguments' => array('administer site configuration'),
-    'type' => MENU_LOCAL_TASK,
-    'weight' => -9,
+    'type' => MENU_NORMAL_ITEM,
   );
 
   return $items;
@@ -79,7 +79,7 @@ function tocbot_config_form($form, $form_state) {
   $form['moduleSettings'] = array(
     '#type' => 'fieldset',
     '#title' => t('Module Settings'),
-    '#description' => t('Module settings to customize tocbot.'),
+    '#description' => t('Module settings to customize Tocbot.'),
     '#collapsible' => FALSE,
     '#collapsed' => FALSE,
   );
@@ -117,9 +117,9 @@ function tocbot_config_form($form, $form_state) {
   // Tocbot Settings tab.
   $form['tocbot_jsSettings'] = array(
     '#type' => 'fieldset',
-    '#title' => t('TocBot JS Settings'),
-    '#description' => t('Tocbot API settings passed to javascript
-    <a href="https://tscanlin.github.io/tocbot/#api">See API for details</a>.'),
+    '#title' => t('JavaScript Settings'),
+    '#description' => t('Tocbot API settings passed to JavaScript.
+    See the <a href="https://tscanlin.github.io/tocbot/#api">API of the Tocbot library</a> for details.'),
     '#collapsible' => FALSE,
     '#collapsed' => FALSE,
   );
