@@ -1,3 +1,5 @@
+NOTE: I've just started the port to Backdrop and am working on it. The module isn't ready to use for Backdrop so far.
+
 # TOCBOT DRUPAL MODULE
 
 ## INTRODUCTION
