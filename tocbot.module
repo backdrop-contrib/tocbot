@@ -342,32 +342,33 @@ function tocbot_block_view($delta = '') {
   $attached = array();
 
   // Load library.
-  if (function_exists('libraries_get_path') && file_exists(libraries_get_path('tocbot') . '/sites/all/libraries/tocbot/js/tocbot.min.js')) {
+  if (file_exists(backdrop_get_path('module', 'tocbot') . '/libraries/tocbot/tocbot.min.js')) {
     $attached['js'] = array(
-      libraries_get_path('tocbot') . '/sites/all/libraries/tocbot/js/tocbot.min.js' => array(
+      backdrop_get_path('module', 'tocbot') . '/libraries/tocbot/tocbot.min.js' => array(
         'weight' => -20,
       ),
     );
   }
   else {
     $attached['js'] = array(
-      "https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js" => array(
+      "https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.8.1/tocbot.min.js" => array(
         'type' => 'external',
         'weight' => -20,
       ),
     );
   }
   // Load css.
-  if (function_exists('libraries_get_path') && file_exists(libraries_get_path('tocbot') . '/sites/all/libraries/tocbot/css/tocbot.css')) {
+  if (file_exists(backdrop_get_path('module', 'tocbot') . '/libraries/tocbot/tocbot.css')) {
     $attached['css'] = array(
-      libraries_get_path('tocbot') . '/sites/all/libraries/tocbot/css/tocbot.css' => array(
+      backdrop_get_path('module', 'tocbot') . '/libraries/tocbot/tocbot.css' => array(
         'weight' => -20,
       ),
+      backdrop_get_path('module', 'tocbot') . '/css/tocbot-style.css' => array(),
     );
   }
   else {
     $attached['css'] = array(
-      'https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css' => array(
+      "https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.8.1/tocbot.css" => array(
         'type' => 'external',
         'weight' => -20,
       ),
