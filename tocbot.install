@@ -40,13 +40,13 @@ function tocbot_uninstall() {
 function tocbot_update_1000() {
   $config = config('tocbot.settings');
   $config->set('tocbot_extrabodyclass', update_variable_get('tocbot_extrabodyclass', 'toc-is-active'));
-  $config->set('tocbot_tocTitle', update_variable_get('tocbot_tocTitle', 'dynamic value in file /tocbot/tocbot.module line 343'));
+  $config->set('tocbot_tocTitle', update_variable_get('tocbot_tocTitle', 'Page Outline:'));
   $config->set('tocbot_minActivate', update_variable_get('tocbot_minActivate', '3'));
   $config->set('tocbot_createAutoIds', update_variable_get('tocbot_createAutoIds', '1'));
-  $config->set('tocbot_tocSelector', update_variable_get('tocbot_tocSelector', 'dynamic value in file /tocbot/tocbot.module line 346'));
-  $config->set('tocbot_contentSelector', update_variable_get('tocbot_contentSelector', 'dynamic value in file /tocbot/tocbot.module line 347'));
-  $config->set('tocbot_headingSelector', update_variable_get('tocbot_headingSelector', 'dynamic value in file /tocbot/tocbot.module line 348'));
-  $config->set('tocbot_ignoreSelector', update_variable_get('tocbot_ignoreSelector', 'dynamic value in file /tocbot/tocbot.module line 349'));
+  $config->set('tocbot_tocSelector', update_variable_get('tocbot_tocSelector', '.js-toc-block'));
+  $config->set('tocbot_contentSelector', update_variable_get('tocbot_contentSelector', '#content'));
+  $config->set('tocbot_headingSelector', update_variable_get('tocbot_headingSelector', 'h2, h3, h4, h5, h6'));
+  $config->set('tocbot_ignoreSelector', update_variable_get('tocbot_ignoreSelector', '.js-toc-ignore'));
   $config->set('tocbot_linkClass', update_variable_get('tocbot_linkClass', 'toc-link'));
   $config->set('tocbot_extraLinkClasses', update_variable_get('tocbot_extraLinkClasses', ''));
   $config->set('tocbot_activeLinkClass', update_variable_get('tocbot_activeLinkClass', 'is-active-link'));
@@ -89,16 +89,4 @@ function tocbot_update_1000() {
   update_variable_del('tocbot_positionFixedClass');
   update_variable_del('tocbot_fixedSidebarOffset');
   update_variable_del('tocbot_includeHtml');
-}
-
-/**
- * Implements hook_install().
- */
-function tocbot_install() {
-  // Dynamically generated variable data was detected.
-  // /tocbot/tocbot.module line 343
-  // /tocbot/tocbot.module line 346
-  // /tocbot/tocbot.module line 347
-  // /tocbot/tocbot.module line 348
-  // /tocbot/tocbot.module line 349
 }
