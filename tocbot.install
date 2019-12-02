@@ -44,7 +44,7 @@ function tocbot_update_1000() {
   $config->set('tocbot_minActivate', update_variable_get('tocbot_minActivate', '3'));
   $config->set('tocbot_createAutoIds', update_variable_get('tocbot_createAutoIds', '1'));
   $config->set('tocbot_tocSelector', update_variable_get('tocbot_tocSelector', '.js-toc-block'));
-  $config->set('tocbot_contentSelector', update_variable_get('tocbot_contentSelector', '#content'));
+  $config->set('tocbot_contentSelector', update_variable_get('tocbot_contentSelector', '.l-content'));
   $config->set('tocbot_headingSelector', update_variable_get('tocbot_headingSelector', 'h2, h3, h4, h5, h6'));
   $config->set('tocbot_ignoreSelector', update_variable_get('tocbot_ignoreSelector', '.js-toc-ignore'));
   $config->set('tocbot_linkClass', update_variable_get('tocbot_linkClass', 'toc-link'));

@@ -22,42 +22,16 @@ function tocbot_menu() {
 }
 
 /**
- * Implements hook_help().
+ * Implements hook_block_info().
  */
-function tocbot_help($path, $arg) {
-  switch ($path) {
-    case 'admin/help#tocbot':
+function tocbot_block_info() {
 
-      $filepath = dirname(__FILE__) . '/README.md';
-      if (file_exists($filepath)) {
-        $readme = file_get_contents($filepath);
-      }
-      else {
-        $filepath = dirname(__FILE__) . '/README.txt';
-        if (file_exists($filepath)) {
-          $readme = file_get_contents($filepath);
-        }
-      }
-      if (!isset($readme)) {
-        return NULL;
-      }
-      if (module_exists('markdown')) {
-        $filters = module_invoke('markdown', 'filter_info');
-        $info = $filters['filter_markdown'];
+  $blocks = array();
+  $blocks['tocbot_block'] = array(
+    'info' => t('Tocbot Block'),
+  );
 
-        if (function_exists($info['process callback'])) {
-          $output = $info['process callback']($readme, NULL);
-        }
-        else {
-          $output = '<pre>' . $readme . '</pre>';
-        }
-      }
-      else {
-        $output = '<pre>' . $readme . '</pre>';
-      }
-
-      return $output;
-  }
+  return $blocks;
 }
 
 /**
@@ -65,7 +39,7 @@ function tocbot_help($path, $arg) {
  */
 function tocbot_config_info() {
   $prefixes['tocbot.settings'] = array(
-    'label' => t('Module name settings'),
+    'label' => t('Tocbot'),
     'group' => t('Configuration'),
   );
 }
@@ -302,8 +276,8 @@ function tocbot_config_form_submit($form, $form_state) {
 
   foreach ($fieldsToSave as $value) {
     $formValue = $form_state['values'][$value];
-    // TODO This variable was probably removed in Backdrop without replacement.
-    variable_set($value, $formValue);
+    config_set('tocbot.settings', $value, $formValue);
+    
   }
 }
 
@@ -329,19 +303,6 @@ function tocbot_libraries_info() {
   );
 
   return $libraries;
-}
-
-/**
- * Implements hook_block_info().
- */
-function tocbot_block_info() {
-
-  $blocks = array();
-  $blocks['tocbot_block'] = array(
-    'info' => t('tocbot block'),
-  );
-
-  return $blocks;
 }
 
 /**

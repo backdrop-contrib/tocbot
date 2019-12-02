@@ -5,7 +5,7 @@
     "tocbot_minActivate": "3",
     "tocbot_createAutoIds": "1",
     "tocbot_tocSelector": ".js-toc-block",
-    "tocbot_contentSelector": "#content",
+    "tocbot_contentSelector": ".l-content",
     "tocbot_headingSelector": "h2, h3, h4, h5, h6",
     "tocbot_ignoreSelector": ".js-toc-ignore",
     "tocbot_linkClass": "toc-link",
