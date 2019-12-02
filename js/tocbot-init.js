@@ -5,17 +5,22 @@
     attach: function attachTocBot(context, settings) {
       if (settings.tocbot.createAutoIds) {
         // Create automatic ids
-        $(settings.tocbot.options.contentSelector + " :header").each(
-          function(index) {
-            // Check to see if it has an id if not generate one
-            if ($(this).attr("id").length === 0) {
-              var hyphenated = $(this)
-                .text()
-                .replace(/\s/g, "-");
-              $(this).attr("id", hyphenated + "-" + index);
-            }
-          }
+        var content = document.querySelector(settings.tocbot.options.contentSelector);
+        var headings = content.querySelectorAll(
+          settings.tocbot.options.headingSelector
         );
+        var headingMap = {}
+
+        Array.prototype.forEach.call(headings, function (heading) {
+          var id = heading.id ? heading.id : heading.textContent.trim().toLowerCase()
+            .split(' ').join('-').replace(/[\!\@\#\$\%\^\&\*\(\)\:]/ig, '')
+          headingMap[id] = !isNaN(headingMap[id]) ? ++headingMap[id] : 0
+          if (headingMap[id]) {
+            heading.id = id + '-' + headingMap[id]
+          } else {
+            heading.id = id
+          }
+        })
       }
       if (
         $(settings.tocbot.options.tocSelector).length &&
