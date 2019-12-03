@@ -1,6 +1,6 @@
 name = Tocbot
-description = This module adds tocbot - Automatic Table of contents from headings
+description = Creates a block with a table of contents (TOC) from HTML headings.
 backdrop = 1.x
 type = module
 package = Content
-configure = admin/config/content/tocbot)
+configure = admin/config/content/tocbot

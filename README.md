@@ -1,45 +1,58 @@
-NOTE: I've just started the port to Backdrop and am working on it. The module isn't ready to use for Backdrop so far.
+Tocbot
+======
 
-# TOCBOT DRUPAL MODULE
+The Tocbot module provides a wrapper around the Tocbot library. It creates a
+block with a table of contents (TOC), generated from HTML headings. The Tocbot
+block makes navigating through documentation pages or long articles easy.
 
-## INTRODUCTION
+Installation
+------------
 
-This module provides a wrapper around Tocbot which builds an automatic table of
-contents (TOC) from headings in an HTML document. This is useful for
-documentation websites or long markdown pages because it makes them easier
-to navigate.
+Install this module using the official Backdrop CMS instructions at
+https://backdropcms.org/guide/modules.
+  
+Configuration
+-------------
 
-- A block is created that will contain the automatic table of contents or
-specify you own location such as an empty div tag in you .tpl files.
-- You can configure most of the Javascript settings from a Drupal (such as
-where to look to grab headings)
-- A minimum limit can be set so it wont activate on simple pages (default 3)
-- Uses css/js from a CDN by default, but you can provide library files if
-you want to host those locally
+- Visit the configuration page under **Administration > Configuration > Content
+  authoring** (`admin/config/content/tocbot`).
+- Change the *Module settings* or the *JavaScript settings* to suit your needs.
+- More information about the *JavaScript settings* can be found at
+  [tscanlin.github.io/tocbot/#api](https://tscanlin.github.io/tocbot/#api).
+  
+Usage
+-----
 
-## REQUIREMENTS
+The module creates a "Tocbot" block that contains a table of contents. Place
+the block in a Backdrop Layout, see https://backdropcms.org/user-guide/blocks.
 
-This module is tested on Drupal 7.
+Coming from Drupal?
+-------------------
 
-## INSTALLATION
+In contrast to the Drupal version which by default uses CSS and JavaScript from
+a CDN, the Backdrop version uses by default local library files bundled with
+the module (CDN files are only loaded if the local library isn't available).
 
-### CDN BY DEFAULT
+Issues
+------
 
-This module will load the tocbot library by CDN by default, if you want to
-host it locally read the LOCAL INSTALLATION section
+Bugs and Feature requests should be reported in the Issue Queue:
+https://github.com/backdrop-contrib/tocbot/issues
 
-### LOCAL INSTALLATION
+Current Maintainers
+-------------------
 
-If you place a copy of the CDN files into your /library folder this module
-will use those instead of the CDN versions.
+- [Olaf Grabienski](https://github.com/olafgrabienski)
 
-- https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js
-  - /libraries/tocbot/js/tocbot.min.js
-- https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css
-  - /libraries/tocbot/css/tocbot.css
+Credits
+-------
 
-## CONFIGURATION
+- Ported to Backdrop CMS by [Olaf Grabienski](https://github.com/olafgrabienski).
+- Originally written for Drupal by [Nicholas Stees](https://www.drupal.org/u/nicholass).
+- Based on the [Tocbot library](https://tscanlin.github.io/tocbot).
 
-The Tocbot module admin interface is located at
-`admin/config/content/tocbot` more explination of those settings can be
-found at [tscanlin.github.io/tocbot/#api](https://tscanlin.github.io/tocbot/#api)
+License
+-------
+
+This project is GPL v2 software. 
+See the LICENSE.txt file in this directory for complete text.
