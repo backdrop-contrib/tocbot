@@ -15,7 +15,7 @@ Configuration
 -------------
 
 - Visit the configuration page under **Administration > Configuration > Content
-  authoring** (`admin/config/content/tocbot`).
+  authoring > Tocbot** (`admin/config/content/tocbot`).
 - Change the *Module settings* or the *JavaScript settings* to suit your needs.
 - More information about the *JavaScript settings* can be found at
   [tscanlin.github.io/tocbot/#api](https://tscanlin.github.io/tocbot/#api).
