@@ -16,15 +16,24 @@ Configuration
 
 - Visit the configuration page under **Administration > Configuration > Content
   authoring > Tocbot** (`admin/config/content/tocbot`).
-- Change the *Module settings* or the *JavaScript settings* to suit your needs.
+- The defaults should be fine to get started but feel free to change the
+  *Module settings* or the *JavaScript settings* to suit your needs.
 - More information about the *JavaScript settings* can be found at
   [tscanlin.github.io/tocbot/#api](https://tscanlin.github.io/tocbot/#api).
   
-Usage
------
+Get started
+-----------
 
-The module creates a "Tocbot" block that contains a table of contents. Place
-the block in a Backdrop Layout, see https://backdropcms.org/user-guide/blocks.
+With the default configuration, the module creates a "Tocbot" block that
+contains a table of contents. When a visitor scrolls down the page, at a certain
+point the block will be treated as fixed positioned. While the content of the
+page appears in the viewport, the corresponding TOC items will be highlighted,
+and nested items will be expanded.
+
+- Create a content page (or a post).
+- Put a lot of text in the body, and use HTML headings to divide the content.
+- Place the Tocbot block in the sidebar of a corresponding Backdrop Layout.
+- Visit the content page, and scroll down to see the block and its behavior.
 
 Coming from Drupal?
 -------------------

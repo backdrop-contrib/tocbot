@@ -31,7 +31,7 @@ function tocbot_update_1000() {
   $config->set('tocbot_scrollSmooth', update_variable_get('tocbot_scrollSmooth', '1'));
   $config->set('tocbot_scrollSmoothDuration', update_variable_get('tocbot_scrollSmoothDuration', '420'));
   $config->set('tocbot_throttleTimeout', update_variable_get('tocbot_throttleTimeout', '50'));
-  $config->set('tocbot_positionFixedSelector', update_variable_get('tocbot_positionFixedSelector', ''));
+  $config->set('tocbot_positionFixedSelector', update_variable_get('tocbot_positionFixedSelector', '.js-toc-block'));
   $config->set('tocbot_positionFixedClass', update_variable_get('tocbot_positionFixedClass', 'is-position-fixed'));
   $config->set('tocbot_fixedSidebarOffset', update_variable_get('tocbot_fixedSidebarOffset', 'auto'));
   $config->set('tocbot_includeHtml', update_variable_get('tocbot_includeHtml', ''));
