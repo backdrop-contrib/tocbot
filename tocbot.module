@@ -42,6 +42,8 @@ function tocbot_config_info() {
     'label' => t('Tocbot'),
     'group' => t('Configuration'),
   );
+
+  return $prefixes;
 }
 
 /**

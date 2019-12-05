@@ -2,37 +2,8 @@
 
 /**
  * @file
- * Install file for tocbot.
+ * Install file for Tocbot.
  */
-
-/**
- * Implements hook_uninstall().
- */
-function tocbot_uninstall() {
-  config_clear('tocbot.settings', 'tocbot_extrabodyclass');
-  config_clear('tocbot.settings', 'tocbot_tocTitle');
-  config_clear('tocbot.settings', 'tocbot_minActivate');
-  config_clear('tocbot.settings', 'tocbot_tocSelector');
-  config_clear('tocbot.settings', 'tocbot_contentSelector');
-  config_clear('tocbot.settings', 'tocbot_headingSelector');
-  config_clear('tocbot.settings', 'tocbot_ignoreSelector');
-  config_clear('tocbot.settings', 'tocbot_linkClass');
-  config_clear('tocbot.settings', 'tocbot_extraLinkClasses');
-  config_clear('tocbot.settings', 'tocbot_activeLinkClass');
-  config_clear('tocbot.settings', 'tocbot_listClass');
-  config_clear('tocbot.settings', 'tocbot_extraListClasses');
-  config_clear('tocbot.settings', 'tocbot_isCollapsedClass');
-  config_clear('tocbot.settings', 'tocbot_collapsibleClass');
-  config_clear('tocbot.settings', 'tocbot_listItemClass');
-  config_clear('tocbot.settings', 'tocbot_collapseDepth');
-  config_clear('tocbot.settings', 'tocbot_orderedList');
-  config_clear('tocbot.settings', 'tocbot_scrollSmooth');
-  config_clear('tocbot.settings', 'tocbot_scrollSmoothDuration');
-  config_clear('tocbot.settings', 'tocbot_throttleTimeout');
-  config_clear('tocbot.settings', 'tocbot_positionFixedSelector');
-  config_clear('tocbot.settings', 'tocbot_positionFixedClass');
-  config_clear('tocbot.settings', 'tocbot_fixedSidebarOffset');
-}
 
 /**
  * Implements hook_update_N().
@@ -56,14 +27,14 @@ function tocbot_update_1000() {
   $config->set('tocbot_collapsibleClass', update_variable_get('tocbot_collapsibleClass', 'is-collapsible'));
   $config->set('tocbot_listItemClass', update_variable_get('tocbot_listItemClass', 'toc-list-item'));
   $config->set('tocbot_collapseDepth', update_variable_get('tocbot_collapseDepth', '0'));
-  $config->set('tocbot_orderedList', update_variable_get('tocbot_orderedList', 'novalue'));
+  $config->set('tocbot_orderedList', update_variable_get('tocbot_orderedList', ''));
   $config->set('tocbot_scrollSmooth', update_variable_get('tocbot_scrollSmooth', '1'));
   $config->set('tocbot_scrollSmoothDuration', update_variable_get('tocbot_scrollSmoothDuration', '420'));
   $config->set('tocbot_throttleTimeout', update_variable_get('tocbot_throttleTimeout', '50'));
   $config->set('tocbot_positionFixedSelector', update_variable_get('tocbot_positionFixedSelector', ''));
   $config->set('tocbot_positionFixedClass', update_variable_get('tocbot_positionFixedClass', 'is-position-fixed'));
   $config->set('tocbot_fixedSidebarOffset', update_variable_get('tocbot_fixedSidebarOffset', 'auto'));
-  $config->set('tocbot_includeHtml', update_variable_get('tocbot_includeHtml', 'novalue'));
+  $config->set('tocbot_includeHtml', update_variable_get('tocbot_includeHtml', ''));
   update_variable_del('tocbot_extrabodyclass');
   update_variable_del('tocbot_tocTitle');
   update_variable_del('tocbot_minActivate');
