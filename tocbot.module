@@ -99,9 +99,9 @@ function tocbot_config_form($form, $form_state) {
   $form['tocbot_jsSettings']['tocbot_tocSelector'] = array(
     '#type' => 'textfield',
     '#title' => t('tocSelector'),
-    '#description' => t('Where to render the table of contents. Place an empty
-    div with a unique class into your theme template or use this block itself
-    by settings it to <code>.js-toc-block</code>.'),
+    '#description' => t('Class of the table of contents wrapper. When you use
+    the Tocbot block, set to <code>.js-toc-block</code>. Alternatively, set an
+    unique class and place an empty div with that class in your theme template.'),
     '#default_value' => $config->get('tocbot_tocSelector'),
   );
   $form['tocbot_jsSettings']['tocbot_contentSelector'] = array(
@@ -163,8 +163,7 @@ function tocbot_config_form($form, $form_state) {
   $form['tocbot_jsSettings']['tocbot_collapsibleClass'] = array(
     '#type' => 'textfield',
     '#title' => t('collapsibleClass'),
-    '#description' => t('Class that gets added when a list should be able to be
-    collapsed but isn\'t necessarily collapsed.'),
+    '#description' => t('Class that gets added when a list is collapsible.'),
     '#default_value' => $config->get('tocbot_collapsibleClass'),
   );
   $form['tocbot_jsSettings']['tocbot_listItemClass'] = array(
@@ -182,8 +181,7 @@ function tocbot_config_form($form, $form_state) {
   $form['tocbot_jsSettings']['tocbot_orderedList'] = array(
     '#type' => 'checkbox',
     '#title' => t('orderedList'),
-    '#description' => t('OrderedList can be set to false to generate unordered
-    lists (ul) instead of ordered lists (ol).'),
+    '#description' => t('Generate ordered (ol) instead of unordered lists (ul).'),
     '#default_value' => $config->get('tocbot_orderedList'),
   );
   $form['tocbot_jsSettings']['tocbot_scrollSmooth'] = array(
@@ -208,7 +206,9 @@ function tocbot_config_form($form, $form_state) {
   $form['tocbot_jsSettings']['tocbot_positionFixedSelector'] = array(
     '#type' => 'textfield',
     '#title' => t('positionFixedSelector'),
-    '#description' => t('Element to add the positionFixedClass to such as the .js-toc-block class.'),
+    '#description' => t('Specify a selector to make the table of contents fixed
+    after scrolling down. Default: <code>.js-toc-block</code>, which is the same
+    default value as in the "tocSelector" setting above.'),
     '#default_value' => $config->get('tocbot_positionFixedSelector'),
   );
   $form['tocbot_jsSettings']['tocbot_positionFixedClass'] = array(

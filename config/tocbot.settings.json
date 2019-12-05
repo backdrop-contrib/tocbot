@@ -17,12 +17,12 @@
     "tocbot_collapsibleClass": "is-collapsible",
     "tocbot_listItemClass": "toc-list-item",
     "tocbot_collapseDepth": "0",
-    "tocbot_orderedList": "novalue",
+    "tocbot_orderedList": "0",
     "tocbot_scrollSmooth": "1",
     "tocbot_scrollSmoothDuration": "420",
     "tocbot_throttleTimeout": "50",
-    "tocbot_positionFixedSelector": "",
+    "tocbot_positionFixedSelector": ".js-toc-block",
     "tocbot_positionFixedClass": "is-position-fixed",
     "tocbot_fixedSidebarOffset": "auto",
-    "tocbot_includeHtml": "novalue"
+    "tocbot_includeHtml": "0"
 }
