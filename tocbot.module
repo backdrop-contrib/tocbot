@@ -61,32 +61,29 @@ function tocbot_config_form($form, $form_state) {
   );
   $form['moduleSettings']['tocbot_extrabodyclass'] = array(
     '#type' => 'textfield',
-    '#title' => t('Extra Body Class on Activation'),
-    '#description' => t('When the tocbot is activated you can add an extra class
-     to the body to adjust the theme of your site if desired. Leave blank if you
-      dont need this.'),
+    '#title' => t('Body class'),
+    '#description' => t('Additional body class for pages with a Tocbot block.'),
     '#default_value' => $config->get('tocbot_extrabodyclass'),
   );
   $form['moduleSettings']['tocbot_tocTitle'] = array(
     '#type' => 'textfield',
-    '#title' => t('tocTitle'),
-    '#description' => t('An optional title for the TOC, leave blank for none.
-    Will be an strong tag with class <code>toc-title</code> so you can theme it'),
+    '#title' => t('TOC title'),
+    '#description' => t('A title for the table of contents. Leave blank for none.'),
     '#default_value' => $config->get('tocbot_tocTitle'),
   );
   $form['moduleSettings']['tocbot_minActivate'] = array(
     '#type' => 'textfield',
-    '#title' => t('minActivate (number)'),
-    '#description' => t('Only activate if greater than or equal to this many
-    headings'),
+    '#title' => t('Minimum number of headings'),
+    '#description' => t('Displays the Tocbot block only on pages where the
+    number of headings is greater than or equal to this value.'),
     '#default_value' => $config->get('tocbot_minActivate'),
   );
   $form['moduleSettings']['tocbot_createAutoIds'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Create Automatic Ids'),
-    '#description' => t('Using Javascript automatic Ids can be created needed
-    for Tocbot to work, or disable it if you have another means of creating ids
-    such as a text filter module'),
+    '#title' => t('Create automatic IDs'),
+    '#description' => t('Use JavaScript to create automatic IDs for headings.
+    Disable if you want to create your IDs otherwise, e.g. manually or using
+    a text filter module.'),
     '#default_value' => $config->get('tocbot_createAutoIds'),
   );
 
