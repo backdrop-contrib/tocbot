@@ -42,6 +42,12 @@ In contrast to the Drupal version which by default uses CSS and JavaScript from
 a CDN, the Backdrop version uses by default local library files bundled with
 the module (CDN files are only loaded if the local library isn't available).
 
+Screencast / Screenshots
+------------------------
+
+- [Video introduction](https://www.youtube.com/watch?v=awh-JYef2i8) by [Tim Erickson](https://github.com/stpaultim)
+- [Screenshots in the Wiki](https://github.com/backdrop-contrib/tocbot/wiki/Screenshots)
+
 Issues
 ------
 
