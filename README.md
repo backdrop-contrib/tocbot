@@ -35,18 +35,18 @@ and nested items will be expanded.
 - Place the Tocbot block in the sidebar of a corresponding Backdrop Layout.
 - Visit the content page, and scroll down to see the block and its behavior.
 
+Screencast / Screenshots
+------------------------
+
+- [Video introduction](https://www.youtube.com/watch?v=awh-JYef2i8) by [Tim Erickson](https://github.com/stpaultim)
+- [Screenshots in the Wiki](https://github.com/backdrop-contrib/tocbot/wiki/Screenshots)
+
 Coming from Drupal?
 -------------------
 
 In contrast to the Drupal version which by default uses CSS and JavaScript from
 a CDN, the Backdrop version uses by default local library files bundled with
 the module (CDN files are only loaded if the local library isn't available).
-
-Screencast / Screenshots
-------------------------
-
-- [Video introduction](https://www.youtube.com/watch?v=awh-JYef2i8) by [Tim Erickson](https://github.com/stpaultim)
-- [Screenshots in the Wiki](https://github.com/backdrop-contrib/tocbot/wiki/Screenshots)
 
 Issues
 ------
