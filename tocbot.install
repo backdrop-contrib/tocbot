@@ -11,7 +11,7 @@
 function tocbot_update_1000() {
   $config = config('tocbot.settings');
   $config->set('tocbot_extrabodyclass', update_variable_get('tocbot_extrabodyclass', 'toc-is-active'));
-  $config->set('tocbot_tocTitle', update_variable_get('tocbot_tocTitle', 'Page Outline:'));
+  $config->set('tocbot_tocTitle', update_variable_get('tocbot_tocTitle', 'Contents'));
   $config->set('tocbot_minActivate', update_variable_get('tocbot_minActivate', '3'));
   $config->set('tocbot_createAutoIds', update_variable_get('tocbot_createAutoIds', '1'));
   $config->set('tocbot_tocSelector', update_variable_get('tocbot_tocSelector', '.js-toc-block'));
