@@ -1,11 +1,12 @@
-.toc-list-item{
-  list-style-type: none;
-}
-
 .is-position-fixed{
   top: 80px;
 }
-
+.toc-list-item{
+  list-style-type: none;
+}
+.toc-link {
+  text-decoration: none;
+}
 .toc-link::before{
-  height: 1rem;
+  height: 2rem;
 }
