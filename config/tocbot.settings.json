@@ -1,7 +1,7 @@
 {
     "_config_name": "tocbot.settings",
     "tocbot_extrabodyclass": "toc-is-active",
-    "tocbot_tocTitle": "Page Outline:",
+    "tocbot_tocTitle": "Contents",
     "tocbot_minActivate": "3",
     "tocbot_createAutoIds": "1",
     "tocbot_tocSelector": ".js-toc-block",
