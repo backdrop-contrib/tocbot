@@ -6,21 +6,23 @@
       if (settings.tocbot.createAutoIds) {
         // Create automatic ids
         var content = document.querySelector(settings.tocbot.options.contentSelector);
-        var headings = content.querySelectorAll(
-          settings.tocbot.options.headingSelector
-        );
-        var headingMap = {}
-
-        Array.prototype.forEach.call(headings, function (heading) {
-          var id = heading.id ? heading.id : heading.textContent.trim().toLowerCase()
-            .split(' ').join('-').replace(/[\!\@\#\$\%\^\&\*\(\)\:]/ig, '')
-          headingMap[id] = !isNaN(headingMap[id]) ? ++headingMap[id] : 0
-          if (headingMap[id]) {
-            heading.id = id + '-' + headingMap[id]
-          } else {
-            heading.id = id
-          }
-        })
+        if (content) {
+          var headings = content.querySelectorAll(
+            settings.tocbot.options.headingSelector
+          );
+          var headingMap = {}
+  
+          Array.prototype.forEach.call(headings, function (heading) {
+            var id = heading.id ? heading.id : heading.textContent.trim().toLowerCase()
+              .split(' ').join('-').replace(/[\!\@\#\$\%\^\&\*\(\)\:]/ig, '')
+            headingMap[id] = !isNaN(headingMap[id]) ? ++headingMap[id] : 0
+            if (headingMap[id]) {
+              heading.id = id + '-' + headingMap[id]
+            } else {
+              heading.id = id
+            }
+          })
+        }
       }
       if (
         $(settings.tocbot.options.tocSelector).length &&
