@@ -1,3 +1,6 @@
+.js-toc-block {
+  position: relative;
+}
 .is-position-fixed{
   top: 80px;
 }
