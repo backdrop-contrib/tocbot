@@ -1,15 +1,31 @@
 .js-toc-block {
   position: relative;
 }
-.is-position-fixed{
+.js-toc-block.is-position-fixed {
   top: 80px;
 }
-.toc-list-item{
+.toc-list-item {
   list-style-type: none;
 }
 .toc-link {
   text-decoration: none;
 }
-.toc-link::before{
+.toc-link::before {
   height: 2rem;
+}
+
+@media (min-width: 48em) {
+  .js-toc-block.is-position-fixed {
+    max-width: 150px;
+  }
+}
+@media (min-width: 62em) {
+  .js-toc-block.is-position-fixed {
+    max-width: 210px;
+  }
+}
+@media (min-width: 75em) {
+  .js-toc-block.is-position-fixed {
+    max-width: 259px;
+  }
 }
