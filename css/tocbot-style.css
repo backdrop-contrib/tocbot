@@ -14,6 +14,12 @@
   height: 2rem;
 }
 
+@media (max-width: 48em) {
+  .js-toc-block.is-position-fixed {
+    position: relative !important;
+    top: unset;
+  }
+}
 @media (min-width: 48em) {
   .js-toc-block.is-position-fixed {
     max-width: 150px;
