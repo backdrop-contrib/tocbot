@@ -2,7 +2,7 @@
   position: relative;
 }
 .js-toc-block.is-position-fixed {
-  top: 80px;
+  position: relative !important;
 }
 .toc-list-item {
   list-style-type: none;
@@ -16,6 +16,8 @@
 
 @media (min-width: 48em) {
   .js-toc-block.is-position-fixed {
+    position: fixed !important;
+    top: 80px;
     max-width: 150px;
   }
 }
