@@ -48,25 +48,28 @@ function tocbot_config_info() {
 }
 
 /**
- * Implements hook_libraries_info().
+ * Implements hook_library_info().
  *
  * For defining external libraries.
  */
-function tocbot_libraries_info() {
+function tocbot_library_info() {
+  $library_path = backdrop_get_path('module', 'tocbot') . '/libraries/tocbot';
 
   // A very simple library.
-  // Expected to be extracted into 'sites/all/libraries/tocbot'.
-  $libraries['tocbot'] = array(
-    'name' => 'tocbot',
-    'vendor url' => 'https://tscanlin.github.io/tocbot/',
-    'download url' => 'https://github.com/tscanlin/tocbot/releases/',
-    'version' => '4.3.1',
-    'path' => 'tocbot',
-    'files' => array(
-      'js' => array('tocbot.min.js'),
-      'css' => array('tocbot.css'),
-    ),
-  );
+  $libraries['tocbot'] = [
+    'title' => 'tocbot',
+    'website' => 'https://tscanlin.github.io/tocbot/',
+    'version' => '4.23.0',
+    'js' => [
+      $library_path . '/tocbot.min.js' => [],
+    ],
+    'css' => [
+      $library_path . '/tocbot.css' => [
+        'type' => 'file',
+        'media' => 'screen',
+      ],
+    ],
+  ];
 
   return $libraries;
 }
@@ -117,7 +120,7 @@ function tocbot_block_view($delta = '') {
   }
   else {
     $attached['js'] = array(
-      "https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.8.1/tocbot.min.js" => array(
+      "https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.23.0/tocbot.min.js" => array(
         'type' => 'external',
         'weight' => -20,
       ),
@@ -134,7 +137,7 @@ function tocbot_block_view($delta = '') {
   }
   else {
     $attached['css'] = array(
-      "https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.8.1/tocbot.css" => array(
+      "https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.23.0/tocbot.css" => array(
         'type' => 'external',
         'weight' => -20,
       ),
