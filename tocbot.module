@@ -9,7 +9,7 @@
  * Implements hook_menu().
  */
 function tocbot_menu() {
-  $items['admin/config/content/tocbot'] = array(
+  $items['admin/config/user-interface/tocbot'] = array(
     'title' => 'Tocbot',
     'description' => 'Adjust the Tocbot module and JavaScript settings to customize your automatic tables of contents (TOC).',
     'page callback' => 'backdrop_get_form',
