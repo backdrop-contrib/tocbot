@@ -30,6 +30,7 @@ function tocbot_block_info() {
   $blocks = array();
   $blocks['tocbot_block'] = array(
     'info' => t('Tocbot Block'),
+    'description' => t('A table of contents (TOC) built from your content headings.'),
   );
 
   return $blocks;
