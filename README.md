@@ -14,7 +14,7 @@ Configuration
 -------------
 
 - Visit the configuration page under **Administration > Configuration > Content
-  authoring > Tocbot** (`admin/config/content/tocbot`).
+  authoring > Tocbot** (`admin/config/user-interface/tocbot`).
 - The defaults should be fine to get started but feel free to change the
   *Module settings* or the *JavaScript settings* to suit your needs.
 - More information about the *JavaScript settings* can be found at
