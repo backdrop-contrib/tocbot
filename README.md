@@ -13,8 +13,7 @@ Install this module using the [official Backdrop CMS instructions](https://backd
 Configuration
 -------------
 
-- Visit the configuration page under **Administration > Configuration > Content
-  authoring > Tocbot** (`admin/config/user-interface/tocbot`).
+- Visit the configuration page under **Administration > Configuration > User interface > Tocbot** (`admin/config/user-interface/tocbot`).
 - The defaults should be fine to get started but feel free to change the
   *Module settings* or the *JavaScript settings* to suit your needs.
 - More information about the *JavaScript settings* can be found at
