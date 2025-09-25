@@ -62,6 +62,11 @@
           );
         }
       }
+      else {
+        // Remove class if no headings.
+        var tocSelectorClass = settings.tocbot.options.tocSelector.replace('.', '');
+        $(settings.tocbot.options.tocSelector).removeClass(tocSelectorClass);
+      }
     },
   };
 })(jQuery);
