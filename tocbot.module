@@ -162,7 +162,7 @@ function tocbot_block_view($delta = '') {
   switch ($delta) {
     case 'tocbot_block':
       $block['content'] = array(
-        '#markup' => '<div class="js-toc-block-wrapper"><div class="js-toc-block"></div></div>',
+        '#markup' => '<div class="js-toc-block-wrapper"><div class="' . trim($config->get('tocbot_tocSelector'), '. ') . '"></div></div>',
         '#attached' => $attached,
       );
       break;
