@@ -5,6 +5,8 @@ The Tocbot module provides a wrapper around the Tocbot library. It creates a
 block with a table of contents (TOC), generated from HTML headings. The Tocbot
 block makes navigating through documentation pages or long articles easy.
 
+Note: You might also have a look at [Tocify](https://github.com/backdrop-contrib/tocify), which uses the same JavaScript library as this module and provides similar functionality. While Tocbot was ported from Drupal 7, Tocify was written specifically for Backdrop.
+
 Installation
 ------------
 
