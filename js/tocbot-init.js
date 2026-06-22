@@ -14,7 +14,7 @@
   
           Array.prototype.forEach.call(headings, function (heading) {
             var id = heading.id ? heading.id : heading.textContent.trim().toLowerCase()
-              .split(' ').join('-').replace(/[\!\@\#\$\%\^\&\*\(\)\:]/ig, '')
+              .split(' ').join('-').replace(/[\!\@\#\$\%\^\&\*\(\)\:\?]/ig, '')
             headingMap[id] = !isNaN(headingMap[id]) ? ++headingMap[id] : 0
             if (headingMap[id]) {
               heading.id = id + '-' + headingMap[id]
